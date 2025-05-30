@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitaVaniBot - Wisdom of the Gita, Delivered to You</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'sanskrit': ['Tiro Devanagari Sanskrit', 'serif'],
+                    },
+                    colors: {
+                        'ivory': '#fefae0',
+                        'saffron': '#f4a261',
+                        'maroon': '#800020',
+                        'deep-indigo': '#1A237E',
+                        'charcoal': '#1c1c1e',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    },
+                    backgroundImage: {
+                        'mandala': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z' fill='%23f4a261' fill-opacity='0.1'/%3E%3C/svg%3E\")",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .shimmer-button {
+            background: linear-gradient(90deg, #f4a261 0%, #ffd700 50%, #f4a261 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        .sacred-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z' fill='%23f4a261' fill-opacity='0.1'/%3E%3C/svg%3E");
+        }
+
+        .lotus-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0C13.4 0 0 13.4 0 30s13.4 30 30 30 30-13.4 30-30S46.6 0 30 0zm0 45c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z' fill='%23f4a261' fill-opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        .sacred-mandala {
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0C44.8 0 0 44.8 0 100s44.8 100 100 100 100-44.8 100-100S155.2 0 100 0zm0 180c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z' fill='%23f4a261' fill-opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .divine-gradient {
+            background: radial-gradient(circle at center, 
+                rgba(244, 162, 97, 0.15) 0%,
+                rgba(255, 215, 0, 0.1) 25%,
+                rgba(26, 35, 126, 0.05) 50%,
+                transparent 70%);
+        }
+        
+        .divine-border {
+            border-image: linear-gradient(45deg, #f4a261, #ffd700, #f4a261) 1;
+            border-style: solid;
+            border-width: 2px;
+            position: relative;
+        }
+
+        .divine-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #f4a261, #ffd700, #f4a261);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .divine-shadow {
+            box-shadow: 0 0 30px rgba(244, 162, 97, 0.2),
+                       0 0 60px rgba(255, 215, 0, 0.1);
+        }
+
+        .sacred-text {
+            text-shadow: 0 0 10px rgba(244, 162, 97, 0.3),
+                         0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .sacred-bg {
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(244, 162, 97, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(26, 35, 126, 0.05) 0%, transparent 70%);
+        }
+
+        .sacred-divider {
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(244, 162, 97, 0.3) 25%,
+                rgba(255, 215, 0, 0.3) 50%,
+                rgba(244, 162, 97, 0.3) 75%,
+                transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sacred-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .sacred-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(244, 162, 97, 0.3);
+        }
+
+        .sacred-corner-tl {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .sacred-corner-tr {
+            top: -2px;
+            right: -2px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .sacred-corner-bl {
+            bottom: -2px;
+            left: -2px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .sacred-corner-br {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body class="font-inter bg-ivory dark:bg-charcoal text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-charcoal/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-saffron dark:text-yellow-400 flex items-center gap-2">
+                <span class="text-2xl">🕉️</span> GitaVaniBot
+            </a>
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-20 relative overflow-hidden sacred-bg">
+        <!-- Sacred Background Elements -->
+        <div class="absolute inset-0 sacred-pattern opacity-10"></div>
+        <div class="absolute inset-0 lotus-pattern opacity-5"></div>
+        <div class="absolute inset-0 sacred-mandala opacity-5"></div>
+        
+        <!-- Floating Sacred Symbols -->
+        <div class="absolute top-20 right-10 text-6xl opacity-10 floating">🕉️</div>
+        <div class="absolute bottom-20 left-10 text-6xl opacity-10 floating" style="animation-delay: -3s">🕉️</div>
+        <div class="absolute top-1/2 left-1/4 text-4xl opacity-5 floating" style="animation-delay: -1.5s">🌸</div>
+        <div class="absolute bottom-1/3 right-1/4 text-4xl opacity-5 floating" style="animation-delay: -4.5s">🌸</div>
+        
+        <div class="container mx-auto px-4 py-16 relative">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" class="relative">
+                    <!-- Sacred Corner Decorations -->
+                    <div class="sacred-corner sacred-corner-tl"></div>
+                    <div class="sacred-corner sacred-corner-tr"></div>
+                    <div class="sacred-corner sacred-corner-bl"></div>
+                    <div class="sacred-corner sacred-corner-br"></div>
+                    
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 sacred-text">
+                        Divine Wisdom of the<br>
+                        <span class="text-saffron dark:text-yellow-400 relative inline-block">
+                            Bhagavad Gita
+                            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-saffron to-transparent"></span>
+                        </span>
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        Experience the eternal wisdom of the Bhagavad Gita, delivered to your Telegram every hour — 
+                        <span class="text-saffron dark:text-yellow-400">illuminating your path with divine knowledge.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://t.me/sanatandhrma_Bot" target="_blank" 
+                           class="shimmer-button px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 divine-shadow">
+                            <span class="text-2xl">📿</span>
+                            Begin Your Spiritual Journey
+                        </a>
+                    </div>
+                </div>
+                <div class="relative" data-aos="fade-left">
+                    <!-- Shloka Card Component -->
+                    <div id="shlokaCard" class="w-full max-w-md mx-auto bg-white/90 dark:bg-gray-800/90 rounded-3xl p-8 shadow-2xl backdrop-blur-sm divine-border divine-shadow transform hover:scale-105 transition-all duration-300">
+                        <div class="text-center mb-6">
+                            <span class="text-4xl mb-4 block floating">🕉️</span>
+                            <span id="shlokaChapter" class="text-saffron dark:text-yellow-400 text-sm font-medium"></span>
+                            <h3 id="shlokaTitle" class="text-2xl font-sanskrit text-gray-900 dark:text-white mt-2 sacred-text">श्रीमद्भगवद्गीता</h3>
+                        </div>
+                        <div class="space-y-6">
+                            <p id="shlokaSanskrit" class="text-xl font-sanskrit text-gray-900 dark:text-white text-center leading-relaxed"></p>
+                            <div class="sacred-divider"></div>
+                            <p id="shlokaTransliteration" class="text-gray-600 dark:text-gray-300 text-center italic"></p>
+                            <div class="sacred-divider"></div>
+                            <p id="shlokaMeaning" class="text-gray-700 dark:text-gray-200 text-center"></p>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <button onclick="loadRandomShloka()" 
+                                    class="shimmer-button px-6 py-3 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 mx-auto divine-shadow">
+                                <span class="text-xl">🔄</span>
+                                Discover Another Shloka
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white dark:bg-gray-900 relative">
+        <div class="absolute inset-0 mandala opacity-5"></div>
+        <div class="container mx-auto px-4 relative">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-16" data-aos="fade-up">
+                Divine Features for Daily Reflection
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Cards -->
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🕉️</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Hourly Shloka Broadcasts</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Receive divine wisdom every hour, delivered to your private chats or groups.</p>
+                </div>
+                
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">📖</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Multi-Format Support</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Sanskrit, transliteration, and meaning - all formats for deeper understanding.</p>
+                </div>
+                
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">🖼️</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Beautiful Quote Images</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Share stunning shloka images with a single tap, perfect for social media.</p>
+                </div>
+                
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl mb-4">🧵</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Threaded Group Delivery</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Organized discussions in dedicated threads, keeping your group chat clean.</p>
+                </div>
+                
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Interactive Commands</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Easy-to-use commands for study and sharing: /shloka, /start, /stopquotes</p>
+                </div>
+                
+                <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all border border-saffron/10 dark:border-yellow-400/10" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-4xl mb-4">🔔</div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Opt-In Simplicity</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Full control over what you receive and when, respecting your spiritual journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 wave-gradient relative overflow-hidden">
+        <div class="absolute inset-0 sacred-pattern opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+                Begin your daily journey with the Bhagavad Gita
+            </h2>
+            <a href="https://t.me/sanatandhrma_Bot" target="_blank"
+               class="shimmer-button inline-block px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all text-lg">
+                📲 Launch GitaVaniBot on Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- Developer Section -->
+    <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <!-- Sacred Background Elements -->
+        <div class="absolute inset-0 sacred-pattern opacity-5"></div>
+        <div class="absolute inset-0 lotus-pattern opacity-3"></div>
+        
+        <div class="container mx-auto px-4 relative">
+            <div class="max-w-4xl mx-auto">
+                <!-- Developer Introduction -->
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-4xl mb-4 block floating">👨‍💻</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 sacred-text">
+                        Meet the Developer
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300">
+                        A passionate developer dedicated to spreading spiritual wisdom through technology
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <!-- Developer Bio -->
+                    <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 divine-border divine-shadow" data-aos="fade-right">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                            <span class="text-saffron dark:text-yellow-400">About Me</span>
+                            <div class="h-px flex-1 bg-gradient-to-r from-saffron/30 to-transparent"></div>
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            Hi! I'm a full-stack developer with a deep interest in spiritual technology. 
+                            My journey in software development is driven by a desire to bridge ancient wisdom 
+                            with modern technology.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                            With expertise in Python, JavaScript, and modern web technologies, 
+                            I create digital solutions that make spiritual knowledge accessible to everyone.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/Tanmay-Tiwaricyber" target="_blank" 
+                               class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 hover:bg-saffron hover:text-white dark:hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                GitHub
+                            </a>
+                            <a href="https://t.me/silent_programmer_official" target="_blank" 
+                               class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 hover:bg-saffron hover:text-white dark:hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.341c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.535.223l.19-2.72 5.18-4.686c.217-.19-.047-.297-.335-.107l-6.4 4.02-2.76-.918c-.6-.2-.612-.6.126-.89l10.8-4.16c.5-.19.94.107.77.89z"/>
+                                </svg>
+                                Telegram
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Developer Notes -->
+                    <div class="bg-ivory dark:bg-gray-800 rounded-3xl p-8 divine-border divine-shadow" data-aos="fade-left">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                            <span class="text-saffron dark:text-yellow-400">Developer Notes</span>
+                            <div class="h-px flex-1 bg-gradient-to-r from-saffron/30 to-transparent"></div>
+                        </h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                                    <span class="text-saffron dark:text-yellow-400">🛠️ Technology Stack</span>
+                                </h4>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Built with Python. <br>
+                                    Uses Telegram Bot API for seamless delivery of spiritual content.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                                    <span class="text-saffron dark:text-yellow-400">🎯 Project Goals</span>
+                                </h4>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    To make the timeless wisdom of the Bhagavad Gita accessible to everyone, 
+                                    delivered through modern technology with respect and authenticity.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                                    <span class="text-saffron dark:text-yellow-400">🤝 Contributing</span>
+                                </h4>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Open to contributions! Whether you're a developer, designer, or spiritual scholar, 
+                                    your input can help make this project better.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                                    <span class="text-saffron dark:text-yellow-400">📝 Future Plans</span>
+                                </h4>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Planning to add more features like audio recitations, 
+                                    detailed commentaries, and community discussions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">About</h3>
+                    <p class="text-gray-600 dark:text-gray-300">A divine digital companion for daily Gita reflection and spiritual growth.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">FAQ</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://github.com/silentprogrammer/gitavani-bot" target="_blank" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">GitHub</a></li>
+                        <li><a href="https://t.me/sanatandhrma_Bot" target="_blank" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">Telegram</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-saffron dark:hover:text-yellow-400">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-gray-600 dark:text-gray-300">
+                © 2025 · GitaVaniBot · Built with ❤️ & Shraddha
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Shloka Card Component
+        let shlokas = [];
+        let currentShlokaIndex = -1;
+
+        // Fetch shlokas from JSON file
+        async function fetchShlokas() {
+            try {
+                const response = await fetch('landing-shlok.json');
+                const data = await response.json();
+                shlokas = data.shlokas;
+                loadRandomShloka(); // Load first shloka
+            } catch (error) {
+                console.error('Error loading shlokas:', error);
+            }
+        }
+
+        // Load random shloka
+        function loadRandomShloka() {
+            if (shlokas.length === 0) return;
+            
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * shlokas.length);
+            } while (newIndex === currentShlokaIndex && shlokas.length > 1);
+            
+            currentShlokaIndex = newIndex;
+            const shloka = shlokas[currentShlokaIndex];
+            
+            // Update DOM elements
+            document.getElementById('shlokaChapter').textContent = `Chapter ${shloka.chapter}, Verse ${shloka.verse}`;
+            document.getElementById('shlokaTitle').textContent = 'श्रीमद्भगवद्गीता';
+            document.getElementById('shlokaSanskrit').textContent = shloka.sanskrit;
+            document.getElementById('shlokaTransliteration').textContent = shloka.transliteration;
+            document.getElementById('shlokaMeaning').textContent = shloka.meaning;
+            
+            // Add fade animation
+            const card = document.getElementById('shlokaCard');
+            card.style.opacity = '0';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transition = 'opacity 0.5s ease-in-out';
+            }, 50);
+        }
+
+        // Initialize shloka card
+        fetchShlokas();
+    </script>
+</body>
+</html>
