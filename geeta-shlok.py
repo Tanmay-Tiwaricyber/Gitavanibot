@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Your bot token (replace with your actual bot token)
-BOT_TOKEN = "6342548180:AAE23RTMPQlriG8srVsAbg6u87mkgSCSDz8"
+BOT_TOKEN = ""
 # Your group chat ID (replace with your actual group chat ID)
 GROUP_CHAT_ID = "-1002320687914"  # @cbseiansss group
 # Message thread ID for Geeta quotes section
